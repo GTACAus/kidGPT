@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "KidGPT Assistant",
+  "version": "1.1",
+  "description": "Automatically inserts a prompt into ChatGPT for kids under 13 and highlights Glitch editor for code pasting.",
+  "permissions": [
+    "clipboardRead",
+    "clipboardWrite",
+    "storage",
+    "tabs",
+    "activeTab",
+    "userScripts",
+    "scripting"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://chat.openai.com/*", 
+        "https://chatgpt.com/*",
+        "https://glitch.com/*" 
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["injected.js", "icon16.png", "icon48.png", "icon128.png"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
